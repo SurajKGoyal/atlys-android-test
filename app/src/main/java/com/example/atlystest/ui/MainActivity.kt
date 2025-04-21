@@ -1,4 +1,4 @@
-package com.example.atlystest
+package com.example.atlystest.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
