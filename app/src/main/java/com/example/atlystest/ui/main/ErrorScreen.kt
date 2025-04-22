@@ -1,8 +1,10 @@
 package com.example.atlystest.ui.main
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -24,47 +26,57 @@ import com.example.atlystest.R
 
 @Composable
 fun ErrorScreen(message: String, onRetry: () -> Unit) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,) {
-        Text(
-            text = message,
-            style = TextStyle(
-                fontSize = 16.sp,
-                color = Color.Black,
-                fontWeight = FontWeight.Medium,
-                lineHeight = 24.sp
-            )
-        )
-        IconButton(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp),
-            onClick = {
-                onRetry()
-            }
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ){
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+            Text(
+                text = message,
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = 24.sp
+                )
+            )
+            IconButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp),
+                onClick = {
+                    onRetry()
+                }
             ) {
-                Icon(
-                    imageVector = Icons.Default.Refresh,
-                    contentDescription = stringResource(R.string.retry)
-                )
-                Text(
-                    text = stringResource(R.string.retry),
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        color = Color.Black,
-                        fontWeight = FontWeight.Normal,
-                        lineHeight = 24.sp
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = stringResource(R.string.retry)
                     )
-                )
-            }
+                    Text(
+                        text = stringResource(R.string.retry),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Normal,
+                            lineHeight = 24.sp
+                        )
+                    )
+                }
 
+            }
         }
     }
+
 }
 
 @Preview

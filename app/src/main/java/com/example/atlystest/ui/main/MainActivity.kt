@@ -83,7 +83,7 @@ class MainActivity : ComponentActivity() {
                                 message = viewModel.trendingMovies.value?.message?.get(LocalContext.current)
                                     ?: stringResource(R.string.something_went_wrong)
                             ) {
-
+                                viewModel.getTrendingMovies()
                             }
                         }
                         composable(Routes.LoadingScreen.route) {
