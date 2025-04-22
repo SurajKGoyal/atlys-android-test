@@ -1,6 +1,7 @@
 package com.example.atlystest.ui.main
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -12,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 fun LoadingScreen(modifier: Modifier = Modifier) {
 
     Box(
-        modifier = modifier
+        modifier = modifier.background(color = Color.Gray)
     ) {
         Log.d("Suraj", "LoadingScreen: ")
         CircularProgressIndicator(
