@@ -6,10 +6,7 @@ A sample project for where you can see trending movies.
 - [Features](#features)
 - [Libraries Used](#libraries-used)
 - [Architecture](#architecture)
-- [Getting Started](#getting-started)
 - [Author](#author)
-- [License](#license)
-- [Contributing](#contributing)
 
 ## Features
 
