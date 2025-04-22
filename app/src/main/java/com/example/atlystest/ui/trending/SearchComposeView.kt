@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +34,7 @@ import com.example.atlystest.util.debounce
 
 @Composable
 fun SearchComposeView(
+    modifier: Modifier = Modifier,
     hint: String = "Search Movies",
     borderColor: Color = Color.Gray,
     searchIconTint: Color = Color.Gray,
@@ -49,8 +51,8 @@ fun SearchComposeView(
     }
 
     Row(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = modifier
+            .fillMaxWidth()
             .padding(12.dp)
             .border(
                 width = 1.dp,
@@ -70,7 +72,7 @@ fun SearchComposeView(
             value = searchValue,
             onValueChange = { searchValue = it },
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .clearFocusOnKeyboardDismiss()
                 .onFocusChanged {
                     if (it.hasFocus) {

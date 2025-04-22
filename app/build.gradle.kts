@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -31,6 +32,7 @@ android {
         }
         debug {
             isMinifyEnabled = false
+            isShrinkResources  = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -38,19 +40,32 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         buildConfig = true
         compose = true
     }
+
+
+    packaging {
+        resources {
+            excludes.add("META-INF/gradle/incremental.annotation.processors")
+        }
+        dex{
+
+        }
+    }
 }
 
 dependencies {
+
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -79,6 +94,31 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.compiler)
 
+ /*   implementation("androidx.compose.ui:ui") {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation("androidx.compose.ui:ui-graphics") {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+
+    implementation("androidx.compose.ui:ui-tooling-preview"){
+        exclude(group = "com.intellij", module = "annotations")
+    }
+
+
+    constraints {
+        implementation("org.jetbrains:annotations:12.0") {
+            because("We need to use only one version")
+        }
+    }*/
+
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.hilt.android.compiler)
+
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    
+    //glide
+    implementation(libs.glide.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -87,4 +127,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("com.google.code.findbugs:jsr305:3.0.2")
+        force("org.jetbrains:annotations:23.0.0")
+        exclude(group = "com.intellij", module = "annotations")
+    }
 }
